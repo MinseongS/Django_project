@@ -1,0 +1,26 @@
+<!-- bbs/templates/board_list.html -->
+
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+{% endblock css %}
+
+{% block title %}<title>게시글 목록</title>{% endblock title %}
+
+{% block content %}
+<table class="table table-hover table-responsive">
+    <thead>
+        <th>Board ID</th><th>제목</th><th>작성자</th>
+    </thead>
+    <tbody>
+        {% for item in boards %}
+        <tr onclick="location.href='/board/{{ item.pk }}/'">
+            <td>{{ item.pk }}</td><td>{{ item.title }}</td><td>{{ item.author }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="/board/create/"><button class="btn btn-primary" type="button">새 게시글 작성</button></a>
+{% endblock content %}

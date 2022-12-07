@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}<title>게시글 상세 - {{ board.pk }}. {{ board.title }}</title>{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+{% endblock css %}
+
+{% block content %}
+<table class="table table-striped table-bordered">
+	<tr>
+		<th>번호</th>
+		<td>{{ board.pk }}</td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td>{{ board.title }}</td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td>{{ board.content | linebreaksbr }}</td>
+	</tr>
+    <tr>
+		<th>작성자</th>
+		<td>{{ board.author }}</td>
+	</tr>
+    <tr>
+		<th>작성일</th>
+		<td>{{ board.created | date:"Y-m-d H:i" }}</td>
+	</tr>
+</table>
+
+<a href="/board/{{ board.pk }}/update/"><button class="btn btn-primary" type="button">게시글 수정</button></a>
+<a href="/board/{{ board.pk }}/delete/"><button class="btn btn-primary" type="button">게시글 삭제</button></a>
+<br><br>
+<a href="/board/"><button class="btn btn-primary" type="button">게시글 목록</button></a>
+{% endblock content %}
