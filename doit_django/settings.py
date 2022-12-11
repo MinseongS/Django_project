@@ -13,6 +13,8 @@ import os
 import json
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +43,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['193.123.255.112']
+ALLOWED_HOSTS = ['193.123.255.112', '127.0.0.1']
 
 
 # Application definition
@@ -90,12 +92,23 @@ WSGI_APPLICATION = "doit_django.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test_db',
+        'USER': 'minseong',
+        'PASSWORD':'alstjd',
+        'HOST':'127.0.0.1',
+        'PORT':3306
     }
 }
+
 
 
 # Password validation
