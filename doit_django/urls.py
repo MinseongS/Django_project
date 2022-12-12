@@ -18,6 +18,7 @@ from django.urls import path
 from bbs.views import BoardListView, BoardCreateView, BoardDeleteView, BoardUpdateView, BoardDetailView
 
 urlpatterns = [
+    path("", BoardListView.as_view()),
     path("admin/", admin.site.urls),
     path('board/', BoardListView.as_view()),
     path('board/<int:board_id>/', BoardDetailView.as_view()),
