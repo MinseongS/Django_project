@@ -49,6 +49,7 @@ ALLOWED_HOSTS = ['193.123.255.112', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    "pyblog",
     "bbs",
     "django.contrib.admin",
     "django.contrib.auth",
