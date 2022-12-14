@@ -1,0 +1,11 @@
+<!-- templates/blog/index.html-->
+<html>
+<body>
+{% for list in dataList %}
+    {{list.id}}<br/>
+    {{list.title}}<br/>
+    {{list.regist_dt}}<br/>
+    {{list.update_dt}}
+{% endfor %}
+</body>
+</html>

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.http import Http404
-from bbs.models import Board
+from bbs.models import Board, Reply
 from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 
@@ -45,6 +45,7 @@ class BoardDetailView(TemplateView):
     template_name = 'board_detail.html'
     queryset = Board.objects.all()
     pk_url_kwargs = 'board_id'
+    replyset = Reply.objects.all()
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -54,18 +55,45 @@ class BoardDetailView(TemplateView):
 
         return queryset.filter(pk=pk).first()
 
+    def get_reply(self, replyset=None):
+        if replyset is None:
+            replyset = self.replyset
+        board = self.get_object()
+        # pk = self.kwargs.get(self.pk_url_kwargs)
+        pk = board.pk
+
+        return replyset.filter(boardNum=pk)
+
+
     def get(self, request, *args, **kwargs):
         board = self.get_object()
+        replies = self.get_reply()
 
         if not board:
             raise Http404('invalid board_id')
 
         context = {
-            'board': board
+            'board': board,
+            'replies': replies
         }
 
         return self.render_to_response(context)
 
+    def post(self, request, *args, **kwargs):
+        board = self.get_object()
+        post_data = {key: request.POST.get(key) for key in ['content']}
+
+        for key in post_data:
+            if not post_data[key]:
+                raise Http404('No Data For {}'.format(key))
+
+        replies = Reply.objects.create(boardNum=board.pk, content=post_data['content'])
+
+        context = {
+            'replies': replies
+        }
+
+        return HttpResponseRedirect(f"/board/{board.pk}")
 
 # 게시글 생성에서 사용할 클래스
 class BoardCreateView(TemplateView):

@@ -41,9 +41,9 @@ def get_secret(setting, secrets=secrets): #예외 처리를 통해 오류 발생
 SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['193.123.255.112', '127.0.0.1']
+# DEBUG = True
+#
+# ALLOWED_HOSTS = ['193.123.255.112', '127.0.0.1']
 
 
 # Application definition
@@ -104,9 +104,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'test_db',
         'USER': 'minseong',
-        'PASSWORD':'alstjd',
-        'HOST':'127.0.0.1',
-        'PORT':3306
+        'PASSWORD': 'alstjd',
+        'HOST': '127.0.0.1',
+        'PORT': 3306
     }
 }
 

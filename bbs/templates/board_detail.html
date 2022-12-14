@@ -30,6 +30,22 @@
 		<td>{{ board.created | date:"Y-m-d H:i" }}</td>
 	</tr>
 </table>
+<table class="table">
+	{% for item in replies %}
+	<tr>
+		<th>댓글</th>
+		<td>{{ item.content }}</td>
+		<td>{{ item.created }}</td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<form action="." method="post" class="form-horizontal">
+		{% csrf_token %}
+		<th>댓글 작성</th>
+		<td><input type="text" class="form-control" name="content"></td>
+		<td><button class="btn btn-primary" type="submit">댓글 저장</button></td>
+	</tr>
+</table>
 
 <a href="/board/{{ board.pk }}/update/"><button class="btn btn-primary" type="button">게시글 수정</button></a>
 <a href="/board/{{ board.pk }}/delete/"><button class="btn btn-primary" type="button">게시글 삭제</button></a>
