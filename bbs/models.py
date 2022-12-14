@@ -16,3 +16,8 @@ class PyBlog(models.Model):
     # class Meta:
     #     db_table = 'py_blog'
 
+class Reply(models.Model):
+    board_id = models.IntegerField(null=False)
+    contnet = models.TextField(null=False)
+    author = models.CharField(max_length=16, null=False)
+    created = models.DataTimeField(auto_now_add=True)
