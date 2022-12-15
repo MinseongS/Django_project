@@ -42,7 +42,7 @@
 		<form action="." method="post" class="form-horizontal">
 		{% csrf_token %}
 		<th>댓글 작성</th>
-		<td><input type="text" class="form-control" name="content"></td>
+		<td><input type="text" class="form-control" name="content" required="required"></td>
 		<td><button class="btn btn-primary" type="submit">댓글 저장</button></td>
 	</tr>
 </table>
